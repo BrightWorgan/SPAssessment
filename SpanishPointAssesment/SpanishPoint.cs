@@ -1,25 +1,15 @@
 
 namespace SpanishPointAssesment
 {
-
     using NUnit.Framework;
-
     using OpenQA.Selenium;
-
     using OpenQA.Selenium.Chrome;
-
     using OpenQA.Selenium.Support.UI;
     using System;
 
-    namespace SeleniumCsharp
-
-    {
-
         public class Tests
-
         {
             string url = "https://www.spanishpoint.ie/";
-
             string expectedDMSText = "Our Document Management System is a comprehensive suite of tools and technologies specifically designed to help organisations streamline and optimise their document management processes.";
 
             IWebDriver driver;
@@ -29,12 +19,10 @@ namespace SpanishPointAssesment
             public void init()
             {
                 driver = new ChromeDriver();
-
                 waiter = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
                 driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             }
-
 
             // sets up pre-test criteria
             [SetUp]
@@ -46,7 +34,6 @@ namespace SpanishPointAssesment
 
             // function to accept coookies if the pop-up displays
             public void AcceptCookies()
-
             {
                 var cookieButton = driver.FindElement(By.Id("wt-cli-accept-btn"));
                 cookieButton.Click();
@@ -63,9 +50,7 @@ namespace SpanishPointAssesment
             }
 
             [Test]
-
             public void VerifyDocumentManagementSystemText()
-
             {
                 // used Find Element by LinkText, as the IDs seemed to be randomly generated, normally I would used IDs
                 // Solutions & Services
@@ -89,22 +74,15 @@ namespace SpanishPointAssesment
                 var activeHeader = driver.FindElement(By.ClassName("vc_active"));
                 Assert.AreEqual(activeHeader.Text, "Document Management System");
 
-
                 var documentManagementText = documentManagementSystem.FindElement(By.CssSelector("p"));
                 Assert.AreEqual(documentManagementText.Text, expectedDMSText);
             }
 
-
             [OneTimeTearDown]
             public void TearDown()
-
             {
                 driver.Quit();
             }
 
         }
-
-    }
-
-
 }
